@@ -1,0 +1,6 @@
+Some examples. Note:
+
+- list.tt will only load if you remove predicative universes by changing
+  line 48 of Infer.hs to
+
+  infer _ (Type i) = pure . Type $ i

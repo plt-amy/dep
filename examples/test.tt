@@ -1,0 +1,18 @@
+assume N : type 0
+assume z : N
+assume s : N -> N
+
+assume U : type 0
+assume unit : U
+
+let number = forall (a : type 0). (a -> a) -> a -> a
+let zero = \(a : type 0) (k : a -> a) (x : a). x
+let one = \(a : type 0) (k : a -> a). k
+let two = \(a : type 0) (k : a -> a) (x : a). k (k x)
+
+let plus = \(m : number) (n : number) (a : type 0) (k : a -> a) (x : a). m a k (n a k x)
+let times = \(m : number) (n : number) (a : type 0) (k : a -> a) (x : a). m a (n a k) x
+let power = \(m : number) (n : number) (a : type 0). n (a -> a) (m a)
+
+let four = plus two two
+let five = plus four one

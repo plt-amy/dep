@@ -1,0 +1,16 @@
+assume U : type 0
+assume unit : U
+
+let List : type 0 -> type 0 = \(a : type 0). forall (r : type 0). (a -> r -> r) -> r -> r
+
+let Nil : forall (a : type 0). List a = \(a : type 0) (r : type 0) (k : a -> r -> r) (x : r). x
+
+let Cons : forall (a : type 0). a -> List a -> List a = \(a : type 0) (x : a) (xs : List a) (r : type 0) (k : a -> r -> r) (z : r). k x (xs r k z)
+
+assume N : type 0
+assume Z : N
+assume S : N -> N
+
+let length : forall (a : type 0). List a -> N = \(a : type 0) (xs : List a). xs N (\(x : a). S) Z
+
+let map : forall (a : type 0) (b : type 0). (a -> b) -> List a -> List b = \(a : type 0) (b : type 0) (f : a -> b) (xs : List a). xs (List b) (\(x : a) (xs : List b). Cons b (f x) xs) (Nil b)
